@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+<head>
+    <title>Liste Des Patients</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container justify-content-center mt-3">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card" style="border-radius: 25px">
+                    <div class="card-body">
+                        <h5 class="display-4 mx-4 mb-4">Patients</h5>
+                        <hr class="mb-5"/>
+                        <form class="form-inline" th:action="@{patients}" method="get">
+                            <input class="form-control mr-sm-2" type="text" name="name" style="border-radius: 25px"
+                                   th:value="${name}" placeholder="Search">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" style="border-radius: 25px"
+                                    type="submit">
+                                Search
+                            </button>
+                            <label style="margin-left: 2mm; font-weight: bold">Total Result : </label>
+                            <label style="margin-left: 4mm; " th:text="${result}"></label>
+                        </form>
+                        <div class="container mt-3">
+                            <table class="table table-hover" style="border-radius: 20px" id="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Date Of Birth</th>
+                                    <th>Insurance</th>
+                                    <th>Allergies</th>
+                                    <th colspan="2" class="text-center text-muted">Operations</th>
+
+                                </tr>
+                                <tr th:each="p:${patientList}">
+                                    <td th:text="${p.id}"></td>
+                                    <td th:text="${p.name}"></td>
+                                    <td th:text="${p.dob}"></td>
+                                    <td th:text="${p.insurance}"></td>
+                                    <td th:text="${p.allergies}"></td>
+                                    <td>
+                                        <form th:action="@{deletePatient}" method="post">
+                                            <input type="hidden" name="id" th:value="${p.id}"/>
+                                            <input type="hidden" name="page" th:value="${currentPage}"/>
+                                            <input type="hidden" name="name" th:value="${name}"/>
+                                            <input type="hidden" name="size" th:value="${size}"/>
+                                            <button type="submit" style="border-radius: 25px" class="btn btn-outline-danger">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{editPatient(id=${p.id})}" style="border-radius: 25px" class="btn btn-outline-warning">Update</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <ul class="nav nav-pills justify-content-center">
+                            <li th:each="page,status:${pages}">
+                                <a style="border-radius: 50px"
+                                   th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+                                   th:href="@{patients(page=${status.index},size=${size},name=${name})}"
+                                   th:text="${status.index}+1">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

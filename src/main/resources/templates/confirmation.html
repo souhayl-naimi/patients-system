@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Patients</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-4" style="border-radius: 25px;">
+                    <div class="card-body">
+                        <h3 class="card-title text-muted">Saved!</h3>
+                        <hr>
+                            <div class="form-group row ml-4">
+                                <label class="col-form-label mr-3 font-weight-bold">ID : </label>
+                                <label class="col-form-label" th:text="${saved.id}"></label>
+                            </div>
+                            <div class="form-group row ml-4">
+                                <label class="col-form-label mr-3 font-weight-bold">Name : </label>
+                                <label class="col-form-label" th:text="${saved.name}"></label>
+                            </div>
+                            <div class="form-group row ml-4">
+                                <label class="col-form-label mr-3 font-weight-bold">Date Of Birth : </label>
+                                <label class="col-form-label" th:text="${saved.dob}"></label>
+                            </div>
+                            <div class="form-group row ml-4">
+                                <label class="col-form-label mr-3 font-weight-bold">Allergies :</label>
+                                <label class="col-form-label" th:text="${saved.allergies}"></label>
+                            </div>
+                        <div class="form-group row ml-4">
+                                <label class="col-form-label mr-3 font-weight-bold">Insurance :</label>
+                                <label class="col-form-label" th:text="${saved.insurance}"></label>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

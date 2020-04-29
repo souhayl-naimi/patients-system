@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" th:href="@{/css/stylesTemp.css}" href="../static/css/stylesTemp.css"
+          rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand text-primary" href="#">Patients System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-black-50" th:href="@{patients}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black-50" href="#">Medecins</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" text-black-50>
+                    Patients
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
+                    <a class="dropdown-item" href="#">Chercher</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ul class="navbar-nav float-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navnav" data-toggle="dropdown">
+                [username]
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">logout</a>
+                <a class="dropdown-item" href="#">login</a>
+                <a class="dropdown-item" href="#">profil</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div style="margin-left:80px;">
+    <section layout:fragment="content">
+    </section>
+</div>
+
+</body>
+</html>
