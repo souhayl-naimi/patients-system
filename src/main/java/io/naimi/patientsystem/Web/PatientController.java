@@ -6,15 +6,16 @@ import io.naimi.patientsystem.Entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class PatientController {
@@ -25,6 +26,7 @@ public class PatientController {
     public String index() {
         return "index";
     }
+
 
     @RequestMapping(value = "/patients")
     public String patients(Model model,
@@ -40,7 +42,12 @@ public class PatientController {
         model.addAttribute("size", size);
         return "patients";
     }
-
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserNameSimple(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        return principal.getName();
+    }
     @RequestMapping(value = "/deletePatient", method = RequestMethod.POST)
     public String deletePatient(Long id, int page, int size, String name) {
         patientRepository.deleteById(id);
@@ -52,7 +59,6 @@ public class PatientController {
         model.addAttribute("patient", new Patient());
         return "formPatient";
     }
-
     @RequestMapping(value = "editPatient", method = RequestMethod.GET)
     public String editPatient(Model model, Long id) {
         Patient patient = patientRepository.findById(id).get();
@@ -60,7 +66,6 @@ public class PatientController {
         model.addAttribute("patient", patient);
         return "formPatient";
     }
-
     @PostMapping(value = "savePatient")
     public String savePatient(@Valid Patient patient, BindingResult bindingResult, Model model) {
         model.addAttribute("saved", patient);

@@ -31,16 +31,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/formPatient/**","/save**/**","/delete**/**","/edit**/**")
+                .hasRole("ADMIN");
         http
                 .authorizeRequests()
-                .antMatchers("/patients", "/webjars/**", "/css/**")
+                .antMatchers("/webjars/**", "/css/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin();
+
+
     }
-//dsflihdskfblkjsdhmoldsjmoidsjfmoidsjgmisjgmolisjgmosijg
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
