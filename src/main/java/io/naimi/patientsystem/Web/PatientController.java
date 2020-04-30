@@ -20,9 +20,9 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String index() {
-        return "index";
+        return "template";
     }
 
 

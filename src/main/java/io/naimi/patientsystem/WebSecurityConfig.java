@@ -33,17 +33,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/save**/**", "/delete**/**", "/edit**/**")
+                .antMatchers("/save**/**", "/delete**/**", "/edit**/**","/formPatient")
                 .hasRole("ADMIN");
         http
                 .authorizeRequests()
-                .antMatchers("/webjars/**", "/css/**")
+                .antMatchers("/webjars/**", "/css/**","/")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
         http
                 .formLogin()
                 .loginPage("/loginPage")
+                .successForwardUrl("/patients")
                 .permitAll();
         http
                 .logout();

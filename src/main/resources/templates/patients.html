@@ -32,7 +32,7 @@
                                     <th>Date Of Birth</th>
                                     <th>Insurance</th>
                                     <th>Allergies</th>
-                                    <th colspan="2" class="text-center text-muted">Operations</th>
+                                    <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" colspan="2" class="text-center text-muted">Operations</th>
 
                                 </tr>
                                 <tr th:each="p:${patientList}">
@@ -47,13 +47,13 @@
                                             <input type="hidden" name="page" th:value="${currentPage}"/>
                                             <input type="hidden" name="name" th:value="${name}"/>
                                             <input type="hidden" name="size" th:value="${size}"/>
-                                            <button type="submit" style="border-radius: 25px" class="btn btn-outline-danger">
+                                            <button th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="submit" style="border-radius: 25px" class="btn btn-outline-danger">
                                                 Supprimer
                                             </button>
                                         </form>
                                     </td>
                                     <td>
-                                        <a th:href="@{editPatient(id=${p.id})}" style="border-radius: 25px" class="btn btn-outline-warning">Update</a>
+                                        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{editPatient(id=${p.id})}" style="border-radius: 25px" class="btn btn-outline-warning">Update</a>
                                     </td>
                                 </tr>
                             </table>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <link type="text/css" th:href="@{/css/stylesTemp.css}" href="../static/css/stylesTemp.css"
@@ -14,7 +15,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand text-primary" href="#">Patients System</a>
+    <a class="navbar-brand text-primary" th:href="@{/}">Patients System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,7 +34,7 @@
                     Patients
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
                     <a class="dropdown-item" href="#">Chercher</a>
                 </div>
             </li>
@@ -41,15 +42,15 @@
     </div>
 
     <ul class="navbar-nav float-right">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navnav" data-toggle="dropdown">
+        <li sec:authorize="!isAuthenticated()" class="nav-item">
+            <a class="btn btn-outline-primary" th:href="@{/login}">Login</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+            <a sec:authentication="name" class="nav-link dropdown-toggle text-uppercase text-info"  id="navnav" data-toggle="dropdown">
                 [username]
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" th:href="@{/loginPage}">Login</a>
-                <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" th:href="@{/username}">Profil</a>
+                <a class="dropdown-item" width="2px;" th:href="@{/logout}">Logout</a>
             </div>
         </li>
     </ul>
