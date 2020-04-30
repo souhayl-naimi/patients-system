@@ -12,13 +12,13 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name="users")
 public class User implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Id
     private String username;
     private String password;
     private Boolean enabled;
-    @OneToMany(mappedBy = "")
+    @ManyToMany
+    @JoinTable(name="USERS_ROLES")
     private Collection<Role> roles;
 }

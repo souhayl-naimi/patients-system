@@ -5,18 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Role {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long role_id;
+@Table(name = "roles")
+public class Role implements Serializable {
+    @Id
     private String role;
-    private String desc;
-
-
+    private String description;
 }

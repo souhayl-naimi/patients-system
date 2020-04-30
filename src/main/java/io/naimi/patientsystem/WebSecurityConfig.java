@@ -24,9 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select username,password,enabled "
                         + "from users "
                         + "where username = ?")
-                .authoritiesByUsernameQuery("select username,authority "
-                        + "from authorities "
-                        + "where username = ?");
+                .authoritiesByUsernameQuery("select user_username,roles_role "
+                        + "from users_roles "
+                        + "where user_username = ?");
     }
 
     @Override
