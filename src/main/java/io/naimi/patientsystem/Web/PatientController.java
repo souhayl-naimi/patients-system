@@ -6,13 +6,11 @@ import io.naimi.patientsystem.Entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -53,6 +51,9 @@ public class PatientController {
         patientRepository.deleteById(id);
         return "redirect:/patients?page=" + page + "&size=" + size + "&name=" + name + "";
     }
+
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    public String login(){return "loginPage";}
 
     @RequestMapping(value = "formPatient", method = RequestMethod.GET)
     public String formPatient(Model model) {
